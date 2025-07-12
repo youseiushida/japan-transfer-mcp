@@ -1,0 +1,51 @@
+{
+    "name": "j-route-planner-mcp",
+    "version": "0.0.1",
+    "description": "Model Context Protocol (MCP) server for J-Route Planner",
+    "keywords": [
+        "mcp",
+        "japan",
+        "transportation",
+        "tourism"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/healthitJP/j-route-planner-mcp",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/healthitJP/j-route-planner-mcp.git"
+    },
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "bin": {
+        "j-route-planner-mcp": "./dist/index.js"
+    },
+    "files": [
+        "dist/**/*",
+        "README.md",
+        "README_JP.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "start": "npm run build && node dist/index.js",
+        "dev": "npm run build && npx mcp-inspector node dist/index.js",
+        "dev:tsx": "npx mcp-inspector tsx src/index.ts",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "prepublishOnly": "npm run build"
+    },
+    "devDependencies": {
+        "@types/node": "^24.0.13",
+        "tsx": "^4.20.3",
+        "typescript": "^5.8.3"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.15.1",
+        "axios": "^1.10.0",
+        "cheerio": "^1.1.0",
+        "tiktoken": "^1.0.21",
+        "vitest": "^3.2.4",
+        "zod": "^3.25.76"
+    }
+}
