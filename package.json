@@ -1,5 +1,5 @@
 {
-    "name": "j-route-planner-mcp",
+    "name": "japan-transfer-mcp",
     "version": "0.0.1",
     "description": "Model Context Protocol (MCP) server for J-Route Planner",
     "keywords": [
@@ -9,16 +9,16 @@
         "tourism"
     ],
     "license": "MIT",
-    "homepage": "https://github.com/healthitJP/j-route-planner-mcp",
+    "homepage": "https://github.com/healthitJP/japan-transfer-mcp",
     "repository": {
         "type": "git",
-        "url": "https://github.com/healthitJP/j-route-planner-mcp.git"
+        "url": "https://github.com/healthitJP/japan-transfer-mcp.git"
     },
     "type": "module",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "bin": {
-        "j-route-planner-mcp": "./dist/index.js"
+        "japan-transfer-mcp": "./dist/index.js"
     },
     "files": [
         "dist/**/*",

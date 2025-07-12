@@ -10,7 +10,7 @@ import { parseRouteSearchResult } from './parser.js';
 const encoder = get_encoding('cl100k_base');
 
 const server = new McpServer({
-    name: "j-route-planner-mcp",
+    name: "japan-transfer-mcp",
     version: "0.1.0"
 });
 
