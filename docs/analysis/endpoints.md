@@ -171,6 +171,12 @@ my_callback_function({
 ```url
 https://www.jorudan.co.jp/norikae/cgi/nori.cgi?eki1=%E5%8F%96%E6%89%8B&eki2=%E4%BA%AC%E9%83%BD&via_on=1&eki3=%E9%9D%99%E5%B2%A1&eki4=%E5%8C%97%E4%B9%9D%E5%B7%9E%E7%A9%BA%E6%B8%AF&eki5=&eki6=&Dyy=2025&Dmm=7&Ddd=9&Dhh=12&Dmn1=5&Dmn2=4&Cway=0&Clate=1&Cfp=1&Czu=2&C7=1&C2=0&C3=1&C1=3&cartaxy=1&bikeshare=1&sort=time&C4=1&C5=0&C6=3&S=%E6%A4%9C%E7%B4%A2&Cmap1=&rf=nr&pg=0&eok1=&eok2=R-&eok3=R-&eok4=R-&eok5=&eok6=&Csg=1
 ```
+
+```url
+https://www.jorudan.co.jp/norikae/cgi/nori.cgi?eki1=%E5%8F%96%E6%89%8B&eki2=%E5%8F%96%E6%89%8B%E3%80%94%E6%A0%B9%E7%BE%BD%E6%9D%91%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%83%86%E3%82%A3%E3%80%95&via_on=-1&Dyy=2025&Dmm=7&Ddd=9&Dhh=12&Dmn1=5&Dmn2=4&Cway=0&Cfp=1&Czu=2&C7=1&C2=0&C3=0&C1=0&cartaxy=1&bikeshare=1&sort=time&C4=5&C5=0&C6=2&S=%E6%A4%9C%E7%B4%A2&Cmap1=&rf=nr&pg=0&eok1=R-&eok2=B-&Csg=1
+```
+
+
 ## payload
 ### eki1 / eki2
 出発駅名 / 到着駅名（UTF-8 URL エンコード）。

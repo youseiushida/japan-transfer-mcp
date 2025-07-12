@@ -14,6 +14,8 @@ import {
   RouteNotice,
 } from './type.js';
 
+
+
 /**
  * HTMLテキストを解析して乗換案内の検索結果を返す
  * @param html ジョルダンの検索結果HTML
@@ -138,9 +140,24 @@ function parseRouteTags($route: cheerio.Cheerio<any>): RouteTag[] {
  * 時刻情報を解析
  */
 function parseTimeInfo($route: cheerio.Cheerio<any>): TimeInfo {
-  const timeText = $route.find('.data_tm').text();
-  const timeMatch = timeText.match(/\((\d{1,2}:\d{2})\)発.*\((\d{1,2}:\d{2})\)着/);
+  const $timeElement = $route.find('.data_tm');
+  const timeText = $timeElement.text();
   
+  // 日付情報がある場合の処理
+  const dateElements = $timeElement.find('.ymd');
+  if (dateElements.length > 0) {
+    // 発時刻と着時刻を個別に抽出
+    const timeMatches = timeText.match(/(\d{1,2}:\d{2})/g);
+    if (timeMatches && timeMatches.length >= 2) {
+      return {
+        departure: timeMatches[0],
+        arrival: timeMatches[1]
+      };
+    }
+  }
+  
+  // 通常の形式での解析
+  const timeMatch = timeText.match(/\((\d{1,2}:\d{2})\)発.*\((\d{1,2}:\d{2})\)着/);
   if (timeMatch) {
     return {
       departure: timeMatch[1],
@@ -149,7 +166,7 @@ function parseTimeInfo($route: cheerio.Cheerio<any>): TimeInfo {
   }
   
   // 分表示の場合
-  const altTimeMatch = timeText.match(/(\d{1,2}:\d{2})発.*(\d{1,2}:\d{2})着/);
+  const altTimeMatch = timeText.match(/(\d{1,2}:\d{2})発\s*→\s*(\d{1,2}:\d{2})着/);
   if (altTimeMatch) {
     return {
       departure: altTimeMatch[1],

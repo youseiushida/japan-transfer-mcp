@@ -53,7 +53,7 @@ export type SuggestQuery = {
     /**
      * Cache buster or timestamp.
      */
-    _: number
+    _?: number
 }
 
 /**
@@ -259,7 +259,7 @@ export type RouteSearchQuery = {
 /**
  * Schema for the route search result.
  */
-export interface RouteSearchResult {
+export type RouteSearchResult = {
   /**
    * List of route results.
    */
@@ -274,7 +274,7 @@ export interface RouteSearchResult {
 /**
  * Represents a single route result.
  */
-export interface Route {
+export type Route = {
   /**
    * Unique route ID.
    */
@@ -324,7 +324,7 @@ export interface Route {
 /**
  * Represents a tag associated with a route.
  */
-export interface RouteTag {
+export type RouteTag = {
   /**
    * Type of the tag.
    */
@@ -342,7 +342,7 @@ export interface RouteTag {
 /**
  * Represents time information for a route.
  */
-export interface TimeInfo {
+export type TimeInfo = {
   /**
    * Departure time.
    */
@@ -364,7 +364,7 @@ export interface TimeInfo {
 /**
  * Represents fare information for a route.
  */
-export interface FareInfo {
+export type FareInfo = {
   /**
    * Total fare (in yen).
    */
@@ -382,7 +382,7 @@ export interface FareInfo {
 /**
  * Represents a fare breakdown.
  */
-export interface FareBreakdown {
+export type FareBreakdown = {
   /**
    * Segment name.
    */
@@ -400,7 +400,7 @@ export interface FareBreakdown {
 /**
  * Represents CO2 emission information.
  */
-export interface CO2Info {
+export type CO2Info = {
   /**
    * CO2 emission amount.
    */
@@ -418,7 +418,7 @@ export interface CO2Info {
 /**
  * Represents a segment of a route.
  */
-export interface RouteSegment {
+export type RouteSegment = {
   /**
    * Segment type.
    */
@@ -440,7 +440,7 @@ export interface RouteSegment {
 /**
  * Represents station information.
  */
-export interface StationInfo {
+export type StationInfo = {
   /**
    * Station name.
    */
@@ -470,7 +470,7 @@ export interface StationInfo {
 /**
  * Represents transport information.
  */
-export interface TransportInfo {
+export type TransportInfo = {
   /**
    * Transport type.
    */
@@ -525,7 +525,7 @@ export interface TransportInfo {
 /**
  * Represents transfer information.
  */
-export interface TransferInfo {
+export type TransferInfo = {
   /**
    * Transfer time (minutes).
    */
@@ -543,7 +543,7 @@ export interface TransferInfo {
 /**
  * Represents weather information.
  */
-export interface WeatherInfo {
+export type WeatherInfo = {
   /**
    * Weather condition.
    */
@@ -561,7 +561,7 @@ export interface WeatherInfo {
 /**
  * Represents a station service.
  */
-export interface StationService {
+export type StationService = {
   /**
    * Service type.
    */
@@ -579,7 +579,7 @@ export interface StationService {
 /**
  * Represents a route notice.
  */
-export interface RouteNotice {
+export type RouteNotice = {
   /**
    * Type of the notice.
    */
@@ -605,7 +605,7 @@ export interface RouteNotice {
 /**
  * API response wrapper type.
  */
-export interface RouteSearchResponse {
+export type RouteSearchResponse = {
   /**
    * Search result.
    */
@@ -627,7 +627,7 @@ export interface RouteSearchResponse {
 /**
  * Search options.
  */
-export interface SearchOptions {
+export type SearchOptions = {
   /**
    * Transport modes.
    */
