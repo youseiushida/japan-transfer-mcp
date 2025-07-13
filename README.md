@@ -121,24 +121,6 @@ Search for "Tokyo Station" → Returns detailed information about Tokyo Station 
 Plan a route from Tokyo Station to Osaka Station departing at 9:00 AM tomorrow → Returns multiple route options with schedules, fares, and transfer information.
 ```
 
-## Dependencies
-
-Main dependencies:
-- `@modelcontextprotocol/sdk`: MCP server development kit
-- `axios`: HTTP client for API requests
-- `cheerio`: HTML parsing for web scraping
-- `tiktoken`: Token counting for response optimization
-- `zod`: Schema validation
-
-## Data Sources
-
-This server integrates with Japanese transportation APIs to provide:
-- Real-time train and bus schedules
-- Fare information
-- Transfer details
-- Route optimization
-- Weather information for stations
-
 ## Troubleshooting
 
 ### Common Issues
@@ -186,8 +168,36 @@ The server returns richly formatted responses with:
 
 - Supports Japanese transportation networks only
 - Requires Japanese language input for station names
-- Real-time data depends on upstream API availability
 - Some remote or local transportation services may not be covered
+
+## Using as a Library
+
+This MCP server can also be used as a library in other Node.js projects. When imported as a module, it will not automatically connect to stdio transport, allowing you to use the server programmatically.
+
+### Installation
+
+```bash
+npm install japan-transfer-mcp
+```
+
+### Usage
+
+```javascript
+import server from 'japan-transfer-mcp';
+
+// Use the server instance programmatically
+// The server will not auto-connect when imported as a library
+// You can access the server's tools and handlers directly
+```
+
+## Dependencies
+
+Main dependencies:
+- `@modelcontextprotocol/sdk`: MCP server development kit
+- `axios`: HTTP client for API requests
+- `cheerio`: HTML parsing for web scraping
+- `tiktoken`: Token counting for response optimization
+- `zod`: Schema validation
 
 ## License
 
