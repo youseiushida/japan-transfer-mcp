@@ -195,7 +195,7 @@ import server from 'japan-transfer-mcp';
 - `@modelcontextprotocol/sdk`: MCP サーバー開発キット
 - `axios`: API リクエスト用 HTTP クライアント
 - `cheerio`: ウェブスクレイピング用 HTML パーサー
-- `tiktoken`: 応答最適化のためのトークン計算
+- `gpt-tokenizer`: 応答最適化のためのトークン計算
 - `zod`: スキーマ検証
 
 ## ライセンス

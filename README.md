@@ -196,7 +196,7 @@ Main dependencies:
 - `@modelcontextprotocol/sdk`: MCP server development kit
 - `axios`: HTTP client for API requests
 - `cheerio`: HTML parsing for web scraping
-- `tiktoken`: Token counting for response optimization
+- `gpt-tokenizer`: Token counting for response optimization
 - `zod`: Schema validation
 
 ## License

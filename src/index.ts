@@ -2,18 +2,16 @@
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from 'zod';
-import { get_encoding } from 'tiktoken';
+import { countTokens } from 'gpt-tokenizer';
 import { pathToFileURL } from 'url';
 
 import { fetchSuggest, fetchRouteSearch } from './fetcher.js';
 import { parseRouteSearchResult } from './parser.js';
 import { formatRouteSearchResponse } from './formatter.js';
 
-const encoder = get_encoding('cl100k_base');
-
 const server = new McpServer({
     name: "japan-transfer-mcp",
-    version: "0.0.2"
+    version: "0.0.4"
 });
 
 
@@ -73,10 +71,10 @@ server.registerTool("search_station_by_name",
             let max = typeof maxTokens === "number" ? maxTokens : Infinity;
             for (let i = 0; i < merged.length; i++) {
                 const next = (result ? "," : "") + merged[i];
-                const tokens = encoder.encode(result + next);
-                if (tokens.length > max) break;
+                const newTokenCount = countTokens(result + next);
+                if (newTokenCount > max) break;
                 result += (result ? "," : "") + merged[i];
-                tokenCount = tokens.length;
+                tokenCount = newTokenCount;
             }
             return {
                 content: [{
@@ -180,12 +178,12 @@ server.registerTool("search_route_by_station_name",
             
             // maxTokensによる制限
             if (maxTokens) {
-                const tokens = encoder.encode(resultText);
-                if (tokens.length > maxTokens) {
+                const tokenCount = countTokens(resultText);
+                if (tokenCount > maxTokens) {
                     // トークン数が制限を超える場合は、ルートの数を減らす
                     const limitedResult = {
                         ...parsedResult,
-                        routes: parsedResult.routes.slice(0, Math.max(1, Math.floor(parsedResult.routes.length * maxTokens / tokens.length)))
+                        routes: parsedResult.routes.slice(0, Math.max(1, Math.floor(parsedResult.routes.length * maxTokens / tokenCount)))
                     };
                     resultText = formatRouteSearchResponse(limitedResult, response.url, from, to, datetime);
                 }
