@@ -11,7 +11,7 @@ import { formatRouteSearchResponse } from './formatter.js';
 
 const server = new McpServer({
     name: "japan-transfer-mcp",
-    version: "0.0.4"
+    version: "0.0.6"
 });
 
 
@@ -208,14 +208,19 @@ server.registerTool("search_route_by_station_name",
 );
 
 
-// メインモジュールとして実行された場合のみconnectする。
-
-const currentFileUrl = import.meta.url;
-const scriptFileUrl = pathToFileURL(process.argv[1]).href;
-
-if (currentFileUrl === scriptFileUrl) { 
-    const transport = new StdioServerTransport();  
-    await server.connect(transport);  
-};
-
+// メインモジュールとして実行された場合のみconnectする。  
+const currentFileUrl = import.meta.url;  
+  
+try {  
+    const scriptFileUrl = pathToFileURL(process.argv[1]).href;  
+      
+    if (currentFileUrl === scriptFileUrl) {   
+        const transport = new StdioServerTransport();    
+        await server.connect(transport);    
+    }  
+} catch (error) {  
+    // pathToFileURLが失敗した場合（引数がundefinedなど）は何もしない  
+    // これにより、ライブラリとしてimportされた場合と同じ動作になる  
+}  
+  
 export default server;

@@ -95,18 +95,14 @@ Claude Desktopで日本の交通機関検索機能を使いたい方に最適で
 }
 ```
 
-#### 代替方法: Node.jsを直接使用
+### オンラインテスト
 
-```json
-{
-  "mcpServers": {
-    "japan-transfer-mcp": {
-      "command": "node",
-      "args": ["path/to/japan-transfer-mcp/dist/index.js"]
-    }
-  }
-}
-```
+ローカルセットアップなしでMCPサーバーの機能をオンラインでテストできます：
+
+- **SSE形式**: https://japan-transfer-mcp-server.ushida-yosei.workers.dev/sse
+- **Streamable HTTP形式**: https://japan-transfer-mcp-server.ushida-yosei.workers.dev/mcp
+
+ローカルセットアップの前に、[@https://playground.ai.cloudflare.com/](https://playground.ai.cloudflare.com/) でこれらのエンドポイントを試してサーバー機能をテストしてください。
 
 ## 使用例
 

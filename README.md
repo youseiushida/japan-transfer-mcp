@@ -96,18 +96,14 @@ Add the following configuration to your `claude_desktop_config.json` file:
 }
 ```
 
-#### Alternative: Using Node.js directly
+### Online Testing
 
-```json
-{
-  "mcpServers": {
-    "japan-transfer-mcp": {
-      "command": "node",
-      "args": ["path/to/japan-transfer-mcp/dist/index.js"]
-    }
-  }
-}
-```
+You can test the MCP server functionality online without local setup:
+
+- **SSE Format**: https://japan-transfer-mcp-server.ushida-yosei.workers.dev/sse
+- **Streamable HTTP Format**: https://japan-transfer-mcp-server.ushida-yosei.workers.dev/mcp
+
+Try these endpoints at [@https://playground.ai.cloudflare.com/](https://playground.ai.cloudflare.com/) to test the server functionality before setting up locally.
 
 ## Usage Examples
 

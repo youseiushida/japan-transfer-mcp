@@ -1,6 +1,6 @@
 {
     "name": "japan-transfer-mcp",
-    "version": "0.0.4",
+    "version": "0.0.6",
     "description": "Model Context Protocol (MCP) server for J-Route Planner",
     "keywords": [
         "mcp",
