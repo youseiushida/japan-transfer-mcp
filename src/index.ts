@@ -1,8 +1,10 @@
 #!/usr/bin/env node
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from 'zod';
 import { get_encoding } from 'tiktoken';
+import express from 'express';
+import cors from 'cors';
 
 import { fetchSuggest, fetchRouteSearch } from './fetcher.js';
 import { parseRouteSearchResult } from './parser.js';
@@ -378,5 +380,79 @@ server.registerTool("search_route_by_station_name",
     }
 );
 
-const transport = new StdioServerTransport();
-await server.connect(transport);
+
+
+// Expressアプリケーションを作成
+const app = express();
+app.use(cors()); // CORSを有効化
+app.use(express.json());
+
+// StreamableHTTPServerTransportを初期化（ステートレス）
+const transport = new StreamableHTTPServerTransport({
+  sessionIdGenerator: undefined,
+});
+
+// サーバーとトランスポートを接続
+server.connect(transport).catch(console.error);
+
+// /mcp エンドポイントでPOSTリクエストを処理
+app.post("/mcp", async (req, res) => {
+  console.log("Received MCP request:", req.body);
+  try {
+    await transport.handleRequest(req, res, req.body);
+  } catch (error) {
+    console.error("Error handling MCP request:", error);
+    if (!res.headersSent) {
+      res.status(500).json({
+        jsonrpc: "2.0",
+        error: {
+          code: -32603,
+          message: "Internal server error",
+        },
+        id: req.body?.id || null,
+      });
+    }
+  }
+});
+
+// GETリクエストには 405 Method Not Allowed を返す
+app.get("/mcp", (req, res) => {
+  res.writeHead(405, { 'Content-Type': 'application/json' }).end(
+    JSON.stringify({
+      jsonrpc: "2.0",
+      error: { code: -32000, message: "Method not allowed." },
+      id: null,
+    })
+  );
+});
+
+// DELETEリクエストにも 405 Method Not Allowed を返す
+app.delete("/mcp", (req, res) => {
+  res.writeHead(405, { 'Content-Type': 'application/json' }).end(
+    JSON.stringify({
+      jsonrpc: "2.0",
+      error: { code: -32000, message: "Method not allowed." },
+      id: null,
+    })
+  );
+});
+
+// サーバーを起動
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}/mcp`);
+});
+
+// Graceful shutdown
+process.on("SIGINT", async () => {
+  console.log("Shutting down server...");
+  try {
+    await transport.close();
+    await server.close();
+    console.log("Server shutdown complete");
+    process.exit(0);
+  } catch (error) {
+    console.error(`Error during shutdown:`, error);
+    process.exit(1);
+  }
+});
